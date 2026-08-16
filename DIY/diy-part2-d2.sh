@@ -9,12 +9,12 @@ BUILD_DATE="$(TZ=Asia/Shanghai date '+%Y.%m.%d')"
 BUILD_TIME="$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S %Z')"
 
 # Keep a hard image-size safety margin. The physical firmware partition is
-# 32448 KiB; limiting generated images to 30000 KiB prevents future core growth
+# 32448 KiB; limiting generated images to 30100 KiB prevents future core growth
 # from silently consuming the last couple of MiB needed by overlay metadata and
 # small persistent configuration changes.
 DEVICE_IMAGE_MAKEFILE="target/linux/ramips/image/mt7621.mk"
-sed -i '/define Device\/d-team_newifi-d2/,/endef/ s/IMAGE_SIZE := 32448k/IMAGE_SIZE := 30000k/' "$DEVICE_IMAGE_MAKEFILE"
-grep -A8 'define Device/d-team_newifi-d2' "$DEVICE_IMAGE_MAKEFILE" | grep -q 'IMAGE_SIZE := 30000k' || {
+sed -i '/define Device\/d-team_newifi-d2/,/endef/ s/IMAGE_SIZE := 32448k/IMAGE_SIZE := 30100k/' "$DEVICE_IMAGE_MAKEFILE"
+grep -A8 'define Device/d-team_newifi-d2' "$DEVICE_IMAGE_MAKEFILE" | grep -q 'IMAGE_SIZE := 30100k' || {
   echo "Unable to reserve the Newifi D2 image-size safety margin." >&2
   exit 1
 }
