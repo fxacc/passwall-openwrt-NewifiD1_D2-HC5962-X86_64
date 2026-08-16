@@ -33,6 +33,13 @@ GitHub Actions 会在相关文件变更后触发固件编译，包括：
 - 默认 Hostname：`Newifi-D2`
 - 固件产物路径：`openwrt/bin/targets/ramips/mt7621`
 
+## Geo 数据与空间保护
+
+- 固件内置经过校验的完整 GeoIP/Geosite 只读兜底，开机后复制到 `/tmp` 使用。
+- 在线更新只写入 RAM；下载或校验失败时继续使用兜底数据，不占用 overlay。
+- 更新会避开 PassWall2 订阅、规则更新和线路切换，并在连接异常时自动回滚和熔断重启。
+- Newifi D2 镜像构建上限设为 30000 KiB，为配置和 overlay 元数据保留空间。
+
 ## 致谢
 
 本仓库的自动化构建流程参考了 [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)。
